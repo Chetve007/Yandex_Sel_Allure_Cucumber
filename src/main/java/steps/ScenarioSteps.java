@@ -45,5 +45,23 @@ public class ScenarioSteps {
         searchSteps.stepPushButtonShow();
     }
 
+    @When("^количество предтавленных товаров равно \"(.*)\"$")
+    public void stepCheckAmount(int size) {
+        marketSteps.stepCheckAmount(size);
+    }
 
+    @When("^ввели первый элемент из списка в поисковую строку$")
+    public void stepEnterFirstValueFromList() {
+        marketSteps.stepEnterFirstValueFromList();
+    }
+
+    @When("^нажали на кнопку 'Найти'$")
+    public void stepPushToFind() {
+        marketSteps.stepPushToFind();
+    }
+
+    @When("^выведенный товар совпадает с первым товаром полученным из списка найденных$")
+    public void stepCheckItem() {
+        marketSteps.stepCheckItem();
+    }
 }

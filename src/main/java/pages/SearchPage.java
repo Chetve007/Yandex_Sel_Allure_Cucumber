@@ -35,7 +35,7 @@ public class SearchPage {
         }
     }
 
-    void fillField(WebElement el, String value) {
+    public void fillField(WebElement el, String value) {
         el.clear();
         el.sendKeys(value);
     }

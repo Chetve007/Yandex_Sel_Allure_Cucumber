@@ -10,12 +10,12 @@ import java.util.concurrent.TimeUnit;
 
 public class MainPage {
 
-    @FindBy(xpath = "//div[@class='home-arrow__tabs']")
-    WebElement mainMenu;
-
     public MainPage() {
         PageFactory.initElements(BaseSteps.getDriver(), this);
     }
+
+    @FindBy(xpath = "//div[@class='home-arrow__tabs']")
+    WebElement mainMenu;
 
     public void selectMainMenu(String menuItem) {
         mainMenu.findElement(By.xpath(String.format(".//a[contains(text(), '%s')]", menuItem))).click();
