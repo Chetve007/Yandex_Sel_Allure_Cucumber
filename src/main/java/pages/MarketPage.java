@@ -12,6 +12,7 @@ import steps.BaseSteps;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class MarketPage {
 
@@ -21,10 +22,13 @@ public class MarketPage {
         PageFactory.initElements(BaseSteps.getDriver(), this);
     }
 
+    @FindBy(xpath = "//span[contains(@class, 'button2 button2_size_m button2_theme_action')]")
+    WebElement yourRegion;
+
     @FindBy(xpath = "//a[contains(text(), 'Перейти ко всем фильтрам')]")
     WebElement filter;
 
-    @FindBy(xpath = "//div[@class='n-snippet-card2__title']")
+    @FindBy(xpath = "//div[@class and @data-id]//div[contains(@class, 'title')]")
     List<WebElement> amount;
 
     @FindBy(name = "text")
@@ -35,6 +39,11 @@ public class MarketPage {
 
     @FindBy(xpath = "//h1[@class='title title_size_28 title_bold_yes']")
     WebElement item;
+
+    public void confirmRegion() {
+        new WebDriverWait(BaseSteps.getDriver(), 5, 500).until(ExpectedConditions.visibilityOf(yourRegion));
+        yourRegion.click();
+    }
 
     public void selectMarketMenu(String mainItem) {
         WebElement mainEl = BaseSteps.getDriver().findElement(By.xpath(String.format("//a[@class='link topmenu__link' and contains(text(), '%s')]", mainItem)));
@@ -56,12 +65,13 @@ public class MarketPage {
     }
 
     public void checkAmount(int actualSize) {
-        assertEquals("Указано неверное количество", actualSize, getAmount());
+        System.err.println("\nAmount = " + getAmount());
+        assertEquals(String.format("Указано неверное количество. Должно быть [%s] (считать разучился что ли!!!).", getAmount()), actualSize, getAmount());
     }
 
     public String getFirstElementFromAmount() {
-        firstElement = amount.get(0).getText();
-        System.err.println("First element in list is - " + firstElement);
+        firstElement = amount.get(0).getText().replaceFirst("[А-Яа-я]+", "").trim();
+        System.err.println("\nFirst element in list is - " + firstElement);
         return firstElement;
     }
 
@@ -84,6 +94,6 @@ public class MarketPage {
 
     public void checkItem() {
         new WebDriverWait(BaseSteps.getDriver(), 5, 500).until(ExpectedConditions.visibilityOf(item));
-        assertEquals("Значение не равно ожидаемому", firstElement, getItem());
+        assertTrue("Значение не равно ожидаемому", getItem().contains(firstElement));
     }
 }

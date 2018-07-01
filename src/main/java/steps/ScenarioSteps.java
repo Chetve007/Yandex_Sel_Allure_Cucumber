@@ -10,6 +10,11 @@ public class ScenarioSteps {
     MarketSteps marketSteps = new MarketSteps();
     SearchSteps searchSteps = new SearchSteps();
 
+    @When("^нажали на 'Подтвердить регион'$")
+    public void stepConfirmRegion() {
+        marketSteps.stepConfirmRegion();
+    }
+
     @When("^выбран пункт меню \"(.*)\"$")
     public void stepSelectMainMenu(String menuItem) {
         mainSteps.stepSelectMainMenu(menuItem);

@@ -7,6 +7,11 @@ public class MarketSteps {
 
     MarketPage marketPage = new MarketPage();
 
+    @Step("нажали на 'Подтвердить регион'")
+    public void stepConfirmRegion() {
+        marketPage.confirmRegion();
+    }
+
     @Step("в Маркете выбран пункт меню {0}")
     public void stepSelectMainItem(String mainItem) {
         marketPage.selectMarketMenu(mainItem);
