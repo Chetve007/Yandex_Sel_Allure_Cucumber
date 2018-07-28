@@ -37,7 +37,7 @@ public class MarketPage {
     @FindBy(xpath = "//span//button[@role='button']")
     WebElement toFind;
 
-    @FindBy(xpath = "//h1[@class='title title_size_28 title_bold_yes']")
+    @FindBy(xpath = "//h1[@class='title title_size_28 title_bold_yes']|//div[@class and @data-id]//div[contains(@class, 'title')]")
     WebElement item;
 
     public void confirmRegion() {
